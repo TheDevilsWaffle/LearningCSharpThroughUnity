@@ -10,21 +10,35 @@
 /*/////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 using UnityEngine;
-//using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-
 
 public class ch3_operators : MonoBehaviour
 {
   #region PROPERTIES
+  [Header("3.1 Overloading Operators")]
+  [SerializeField] bool enableSection3_1 = true;
   [SerializeField] Vector2 a = Vector2.zero;
   [SerializeField] Vector2 b = Vector2.zero;
   [SerializeField] TMP_Text oeAdd;
   [SerializeField] TMP_Text oeSubtract;
   [SerializeField] TMP_Text oeMultiply;
   [SerializeField] TMP_Text oeDivide;
+  [Header("3.3 Relational Operators")]
+  [SerializeField] bool enableSection3_3 = true;
+  [SerializeField] TMP_Text relationalText1;
+  [SerializeField] string relational1 = "a";
+  [SerializeField] TMP_Text relationalText2;
+  [SerializeField] string relational2 = "b";
+  [SerializeField] TMP_Text relationalText3;
+  [Range(0,1)][SerializeField] int relational3 = 1;
+  [SerializeField] TMP_Text relationalText4;
+  [Range(0,1)][SerializeField] int relational4 = 0;
+  [SerializeField] TMP_Text relationalText5;
+  [SerializeField] bool relational5 = true;
+  [SerializeField] TMP_Text relationalText6;
+  [SerializeField] bool relational6 = false;
+  
+  
 
   #endregion
   #region INITIALIZATION
@@ -35,7 +49,10 @@ public class ch3_operators : MonoBehaviour
   ///////////////////////////////////////////////////////////////////////////////////////////////
   void OnValidate()
   {
-    OverloadableOperatorsExample();
+    if (enableSection3_1)
+      Section3_1_OverloadableOperatorsExample();
+    if (enableSection3_3)
+      Section3_3_RelationalOperators();
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////
   /// <summary>
@@ -46,30 +63,6 @@ public class ch3_operators : MonoBehaviour
   {
     OnValidate();
   }
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-  /// <summary>
-  /// called on first frame when script is enabled before Update()
-  /// </summary>
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-  void Start()
-  {
-  }
-  #endregion
-  #region UPDATE
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-  /// <summary>
-  /// runs every frame
-  /// </summary>
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-  void Update()
-  {
-
-    //turn this to true if you want to test something in update loop
-#if false
-        UpdateTesting();
-#endif
-
-  }
   #endregion
   #region METHODS
   /*////////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -77,7 +70,7 @@ public class ch3_operators : MonoBehaviour
   /// Overloaded operator example
   /// </summary>
   /*///////////////////////////////////////////////////////////////////////////////////////////////*/
-  void OverloadableOperatorsExample()
+  void Section3_1_OverloadableOperatorsExample()
   {
     IntVector2 _a = new IntVector2((int)a.x, (int)a.y);
     IntVector2 _b = new IntVector2((int)b.x, (int)b.y);
@@ -91,50 +84,21 @@ public class ch3_operators : MonoBehaviour
     oeMultiply.text = "a(" + _a.x + ", " + _a.y + ") * b(" + _b.x + ", " + _b.y + ") = e(" + e.x + ", " + e.y + ")";
     oeDivide.text = "a(" + _a.x + ", " + _a.y + ") / b(" + _b.x + ", " + _b.y + ") = f(" + f.x + ", " + f.y + ")";
   }
-  #endregion
-  #region TESTING
-  ///////////////////////////////////////////////////////////////////////////////////////////////
+  /*////////////////////////////////////////////////////////////////////////////////////////////////*/
   /// <summary>
-  /// test functions using the numpad (make sure numpad is turned on)
+  /// checks whether the supplied operands (arguments) are equal
   /// </summary>
-  ///////////////////////////////////////////////////////////////////////////////////////////////
-  void UpdateTesting()
+  /*///////////////////////////////////////////////////////////////////////////////////////////////*/
+  void Section3_3_RelationalOperators()
   {
-    //Keypad 0
-    if (Input.GetKeyDown(KeyCode.Keypad0))
-    {
+    relationalText1.text = "\"" + relational1 + "\" == \"" + relational2 + "\" returns " + (relational1 == relational2);
+    relationalText2.text = "\"" + relational1 + "\" == \"" + relational1 + "\"returns " + (relational1 == relational1);
 
-    }
-    //Keypad 1
-    if (Input.GetKeyDown(KeyCode.Keypad1))
-    {
+    relationalText3.text = relational3 + " ==  " + relational4 + " returns " + (relational3 == relational4);
+    relationalText4.text = relational4 + " ==  " + relational4 + " returns " + (relational4 == relational4);
 
-    }
-    //Keypad 2
-    if (Input.GetKeyDown(KeyCode.Keypad2))
-    {
-
-    }
-    //Keypad 3
-    if (Input.GetKeyDown(KeyCode.Keypad3))
-    {
-
-    }
-    //Keypad 4
-    if (Input.GetKeyDown(KeyCode.Keypad4))
-    {
-
-    }
-    //Keypad 5
-    if (Input.GetKeyDown(KeyCode.Keypad5))
-    {
-
-    }
-    //Keypad 6
-    if (Input.GetKeyDown(KeyCode.Keypad6))
-    {
-
-    }
+    relationalText5.text = relational5 + " ==  " + relational6 + " returns " + (relational5 == relational6);
+    relationalText6.text = relational6 + " ==  " + relational6 + " returns " + (relational6 == relational6);
   }
   #endregion
 }
